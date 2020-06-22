@@ -4,7 +4,7 @@ Created on Fri Jun  5 13:59:15 2020
 
 @author: marck
 """
-#Create matrix H from Alireza text file
+#Create matrix H from Alireza's text file
 
 import numpy as np
 
@@ -31,19 +31,19 @@ n=H.shape[1]
 k=n-m
     
 codeWord=np.zeros(n)    
-noiseProb=np.random.randint(0,100,n) # on prend des nombres entre 0 et 100   
+noiseProb=np.random.randint(0,100,n) # Random numbers between 0 and 100  
 
 ksiV=np.ones(n)-(2*codeWord)
 
 for i in range(0,n):
-    if noiseProb[i]<5:
+    if noiseProb[i]<2:
         ksiV[i]*=-1
-print("There are {} mistakes in the codeword".format(ksiV.tolist().count(-1)))
+print("There are {} mistakes in the codeword".format(ksiV.tolist().count(-1))) #Only works for all-zero codeword 
 
 #A lot of initializations
 xChapeau=ksiV
 nb_it=0
-IT_MAX=100
+IT_MAX=18
 vi=[]
 ksiC=np.ones((m,n),dtype="int")
 xDecoded=np.ones(n)
