@@ -36,7 +36,7 @@ noiseProb=np.random.randint(0,100,n) # on prend des nombres entre 0 et 100
 ksiV=np.ones(n)-(2*codeWord)
 
 for i in range(0,n):
-    if noiseProb[i]<3:
+    if noiseProb[i]<5:
         ksiV[i]*=-1
 print("There are {} mistakes in the codeword".format(ksiV.tolist().count(-1)))
 
@@ -54,10 +54,11 @@ for j in range(0,m):
 
 ##Decoding
 
+previousx=np.zeros(n)
 #while nb_it==0 or (IT_MAX<nb_it and np.count_nonzero((H@xDecoded)%2)):
-while nb_it<IT_MAX and not np.array_equal(xDecoded,codeWord):
+while nb_it<IT_MAX and not np.array_equal(previousx,xDecoded):#not np.array_equal(xDecoded,codeWord):
 #Step 2
-    
+    previousx=xDecoded
 
     for j in range(0,m):        
         for i in vi[j]:
