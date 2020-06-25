@@ -10,7 +10,7 @@ import os
 
 # =============================================================================
 # Initializing the parameters for the simulation
-matrices=os.listdir("alireza_matrices")
+matrices=os.listdir("matrices_alireza")
 probabilities=(1,2,3,4,5)
 trials=128
 # =============================================================================
@@ -20,7 +20,7 @@ of=open("results/x3.txt","a+")#Open in append mode and creates new file if neede
 of.write("#=============================================#\n")
 for matrixH in matrices:
     print("working on {}".format(matrixH))
-    obj=gal.paritycheck("alireza_matrices/"+matrixH) #Create the object
+    obj=gal.paritycheck("matrices_alireza/"+matrixH) #Create the object
     of.write("Results for {} :\n".format(matrixH))
     of.write("Flip (%)\tBER\tSuccess\n")
     for prob in probabilities:        
