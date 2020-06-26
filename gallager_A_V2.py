@@ -37,8 +37,9 @@ class paritycheck:
         self.k=self.n-self.m
         self.IT_MAX=18
         self.success=0
+        self.failed=0
         self.flipped=0
-        self.nbIter=[]
+        self.nbIter=[] #Not used yet
         self.trial=0
 # =============================================================================
         
@@ -107,6 +108,7 @@ class paritycheck:
 
     def resetCounters(self):
         self.success=0
+        self.failed=0
         self.flipped=0
         self.nbIter=[]
         self.trial=0

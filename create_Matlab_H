@@ -14,4 +14,4 @@ matrices=os.listdir("matrices_alireza")
 for matrix in matrices:
     obj=gal.paritycheck("matrices_alireza/"+matrices[0]) #Create the object
     mdic={"H":obj.H}
-    savemat('matlab/{}.mat'.format(matrix[0:5]),mdic)
+    savemat('matlab/{}.mat'.format(matrix[0:5 ]),mdic)

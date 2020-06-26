@@ -10,13 +10,15 @@ import os
 
 # =============================================================================
 # Initializing the parameters for the simulation
+outputName="x5"
 matrices=os.listdir("matrices_alireza")
+matrices=[matrix for matrix in matrices if ".txt"in matrix]
 probabilities=(1,2,3,4,5)
 trials=128
 # =============================================================================
 
 
-of=open("results/x3.txt","a+")#Open in append mode and creates new file if needed
+of=open("results/{}.txt".format(outputName),"a+")#Open in append mode and creates new file if needed
 of.write("#=============================================#\n")
 for matrixH in matrices:
     print("working on {}".format(matrixH))
@@ -28,7 +30,8 @@ for matrixH in matrices:
             if obj.decoderZero(prob):
                 obj.success+=1
             obj.trial+=1
-        of.write("   {}      \t{:.3f} \t{}/128 \n".format(prob,obj.BER(trials),obj.success))
+        of.write("   {}      \t{:.3f} \t{}/128 \n"
+                 .format(prob,obj.BER(trials),obj.success))
         #get ready for other loop
         obj.resetCounters()
 of.close()
