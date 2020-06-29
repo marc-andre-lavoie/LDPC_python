@@ -113,5 +113,7 @@ class paritycheck:
         self.nbIter=[]
         self.trial=0
         
-    def BER(self,trials):
-        return self.flipped/(self.n*trials)
+    def BER(self):
+        return self.flipped/(self.n*self.trial)
+    def FER(self):
+        return self.failed/self.trial
