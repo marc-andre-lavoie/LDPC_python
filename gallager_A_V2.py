@@ -43,11 +43,16 @@ class paritycheck:
         self.trial=0
 # =============================================================================
         
+        self.dv=[]
+        for i in range(0,self.n):                
+            self.dv.append(self.H[:,i].tolist().count(1))
+        
+        
         
     def decoderZero (self,prob):
         
         codeWord=np.zeros(self.n)    
-        noiseProb=np.random.randint(0,100,self.n) # Random numbers between 0 and 100  
+        noiseProb=np.random.randint(0,1000,self.n) # Random numbers between 0 and 100  
         
         ksiV=np.ones(self.n)-(2*codeWord)
         
@@ -57,12 +62,10 @@ class paritycheck:
         #print("There are {} mistakes in the codeword".format(ksiV.tolist().count(-1))) #Only works for all-zero codeword 
         self.flipped+=ksiV.tolist().count(-1)#Only works for all-zero codeword
         #A lot of initializations
-        #xChapeau=ksiV
         nb_it=0
         vi=[]
         ksiC=np.ones((self.m,self.n),dtype="int")
         xDecoded=np.ones(self.n)
-        #
         #Emplacement des 1 sur les lignes
         for j in range(0,self.m):
             vi.append(np.nonzero(self.H[j,:])[0])
@@ -86,11 +89,8 @@ class paritycheck:
                             
         #Step 3 (Majority voting)
             for i in range(0,self.n):
-                
-                dv=self.H[:,i].tolist().count(1)
-        
                 nbNeg=ksiC[:,i].tolist().count(-1)
-                if nbNeg == dv and ksiV[i]==1: #xChapeau/ksiV
+                if nbNeg == self.dv[i] and ksiV[i]==1: #xChapeau/ksiV
                     ksiV[i]=-1
                     
                 elif nbNeg == 0 and ksiV[i]==-1: #xChapeau/ksiV
