@@ -1,3 +1,6 @@
 #=============================================#
 Results for Code3_MinDis8_Girth8_Dimen56_Rate0518_Length108.txt :
 α   	BER	Success			FER
+#=============================================#
+Results for Code3_MinDis8_Girth8_Dimen56_Rate0518_Length108.txt :
+α   	BER	Success			FER
