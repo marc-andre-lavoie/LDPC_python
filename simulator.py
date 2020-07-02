@@ -13,13 +13,12 @@ import os
 #pr=cProfile.Profile() #xx#
 # =============================================================================
 # Initializing the parameters for the simulation
-outputName="x9"
+outputName="million"
 matrices=[matrix for matrix in os.listdir("matrices_alireza") if ".txt"in matrix]
-probabilities=(5,10)
-trials=100000
+probabilities=(5,10,15,20,25,30)
+trials=1000000
 failed_stop=100
 # =============================================================================
-
 
 of=open("results/{}.txt".format(outputName),"a+")#Open in append mode and creates new file if needed
 of.write("#=============================================#\n")
@@ -28,7 +27,8 @@ for matrixH in matrices:
     print("working on {}".format(matrixH))
     obj=gal.paritycheck("matrices_alireza/"+matrixH) #Create the object
     of.write("Results for {} :\n".format(matrixH))
-    of.write("\u03B1   \tBER\tSuccess\t\t\tFER\n")
+    #of.write("\u03B1   \tBER\tSuccess\t\t\tFER\n")
+    of.write("a   \tBER\tSuccess\t\t\tFER\n")
     for prob in probabilities:
         #while obj.failed<failed_stop:
         while obj.trial<trials:

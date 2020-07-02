@@ -1,0 +1,3 @@
+#=============================================#
+Results for Code1_MinDis8_Girth6_Dimen56_Rate0518_Length108.txt :
+a   	BER	Success			FER
