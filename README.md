@@ -1,8 +1,5 @@
 # LDPC_python
-Student trying to implement LDPC decoder on python
+Student trying to implement LDPC decoder on python for the project ef-fective.
 
-To-do : 
-- Finish simulator
-- Get normal ethernet matrix
 
 
