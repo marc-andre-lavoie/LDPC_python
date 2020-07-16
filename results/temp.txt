@@ -1,0 +1,9 @@
+#=============================================#
+Results for Code3_MinDis8_Girth8_Dimen56_Rate0518_Length108.txt :
+a   	BER	Success			FER	avg it
+#=============================================#
+Results for Code3_MinDis8_Girth8_Dimen56_Rate0518_Length108.txt :
+a   	BER	Success			FER	avg it
+#=============================================#
+Results for Code3_MinDis8_Girth8_Dimen56_Rate0518_Length108.txt :
+a   	BER	Success			FER	avg it
