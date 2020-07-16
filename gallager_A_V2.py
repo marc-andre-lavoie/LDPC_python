@@ -10,6 +10,8 @@ Created on Fri Jun  5 13:59:15 2020
 import numpy as np
 class paritycheck:
     
+    IT_MAX=18
+    
     def __init__(self,file):
 
         matrixText = open(file, "r")
@@ -35,7 +37,6 @@ class paritycheck:
         self.m=self.H.shape[0]
         self.n=self.H.shape[1]
         self.k=self.n-self.m
-        self.IT_MAX=18
         self.success=0
         self.failed=0
         self.flipped=0
@@ -44,15 +45,22 @@ class paritycheck:
 # =============================================================================
         
         self.dv=[]
-        for i in range(0,self.n):                
+        for i in range(0,self.n):
             self.dv.append(self.H[:,i].tolist().count(1))
         
         
         
     def decoderZero (self,prob):
         
-        codeWord=np.zeros(self.n)    
-        noiseProb=np.random.randint(0,1000,self.n) # Random numbers between 0 and 100  
+        codeWord=np.zeros(self.n)
+        
+        #Create random noise
+        denom=1
+        while not prob.is_integer():
+            prob*=10
+            denom*=10
+            
+        noiseProb=np.random.randint(0,denom,self.n) # Random numbers between 0 and 100  
         
         ksiV=np.ones(self.n)-(2*codeWord)
         
@@ -74,7 +82,7 @@ class paritycheck:
         
         previousx=np.zeros(self.n)
         #while nb_it==0 or (IT_MAX<nb_it and np.count_nonzero((H@xDecoded)%2)):
-        while nb_it<self.IT_MAX and not np.array_equal(previousx,xDecoded):#not np.array_equal(xDecoded,codeWord):
+        while nb_it<paritycheck.IT_MAX and not np.array_equal(previousx,xDecoded):#not np.array_equal(xDecoded,codeWord):
         #Step 2
             previousx=xDecoded
         
@@ -117,3 +125,7 @@ class paritycheck:
         return self.flipped/(self.n*self.trial)
     def FER(self):
         return self.failed/self.trial
+    def avg_it(self):
+        return sum(self.avg_it)/len(self.avg_it)
+    
+        
