@@ -12,8 +12,8 @@ img=Image.open("stinkbug.png")
 data=np.asarray(img)
 
 pilImage = Image.fromarray(data,'RGB')
-#pilImage.save('my.png') #Sauvegarder l'image
-#pilImage.show() #Afficher l'image sur l'écran
+pilImage.save('my.png') #Sauvegarder l'image
+pilImage.show() #Afficher l'image sur l'écran
 data.tofile("jambon.bin") #FICHIER BINAIRE QUE J'UTILISERAI
 
 #---------Lecture--------------#

@@ -19,7 +19,7 @@ dc=6
 
 ##Reading the matrices
 matrices=[matrix for matrix in os.listdir("matrices_alireza") if ".txt"in matrix]
-matrixText = open("matrices_alireza/"+matrices[0],"r")
+matrixText = open("matrices_alireza/"+matrices[1],"r")
 lines=matrixText.readlines()
 bigListH=[]
 bigListG=[]
