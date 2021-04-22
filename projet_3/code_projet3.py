@@ -56,7 +56,7 @@ def word_to_bytes(buf_send):
             c=7
             arr_return.append(bit_sum)
             bit_sum=0
-    if(bit_sum!=0): #A REGARDER
+    if(bit_sum!=0 or len(arr_return)==13): #A REGARDER
         arr_return.append(bit_sum)
     arr_return=bytes(arr_return)
     return arr_return 
@@ -64,25 +64,23 @@ def word_to_bytes(buf_send):
 ########################DEBUT CODE###############################
 #On a 3 types de buffers : Bytes, bin, et empty qui contient les 3 pixels
 ##SETUP COMM##
-ser=serial.Serial('/dev/ttyACM0',9600)#,timeout=2)
+ser=serial.Serial('/dev/ttyACM0',115200)#,timeout=1)
 ser.flush()
 ##
 #On prend l'info de l'image
-img=Image.open("stinkbug.png")
+img=Image.open("poly.jpg")
 data=np.asarray(img)
 data_line=data.reshape(-1)#On peut reshape pour reconstruire l'image aussi
 data_line_rec=[]
 H,G=get_H_G(0)
 
-counter=0
-while(counter<562500):
+counter=0 #watchout counter 
+while(counter<len(data_line)):
     buf_send=np.zeros(7,np.uint8)
     buf_send[0]=200#synchro
     for c in range(counter,counter+6):
         buf_send[c-counter+1]=data_line[c]
     counter+=6
-    if(counter==3834):
-        pass
     buf_send_bin=((get_bin_arr(buf_send))@G)%2#Binaire pour encodage
     buf_send_bytes=word_to_bytes(buf_send_bin)#Bytes pour envoie
     buf_rec_bytes=[0]
@@ -103,6 +101,13 @@ while(counter<562500):
     data_line_rec.append(buf_rec)
     if(counter%600==0):
         print(counter)
+data_line_rec=np.array(data_line_rec).reshape(-1)
+shape=data.shape
+matrice_recue=np.reshape(data_line_rec,(shape[0],shape[1],shape[2]))
+#matrice_recue=np.reshape(data_line_rec,(375,500,3))
+matrice_recue=matrice_recue.astype('uint8')
+pilImage = Image.fromarray(matrice_recue,'RGB')
+pilImage.save('souper.png') #Sauvegarder l'image
 ##
 #Ici, le bit le plus significatif est en premier dans le tableau
 # =============================================================================

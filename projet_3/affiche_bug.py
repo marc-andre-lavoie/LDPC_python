@@ -7,21 +7,29 @@ Created on Sun Feb  7 11:35:10 2021
 from PIL import Image
 import numpy as np
 
-
-img=Image.open("stinkbug.png")
+#print("Quelle matrice?")
+#path_matrice=filedialog.askopenfilename()
+img=Image.open("Resultats_rapport/samedi_c_q4.png")
 data=np.asarray(img)
+data_line=data.reshape(-1)
 
-pilImage = Image.fromarray(data,'RGB')
-pilImage.save('my.png') #Sauvegarder l'image
-pilImage.show() #Afficher l'image sur l'écran
-data.tofile("jambon.bin") #FICHIER BINAIRE QUE J'UTILISERAI
+img_init=Image.open("poly.jpg")
+data_init=np.asarray(img_init)
+data_line_init=data_init.reshape(-1)
+
+err_cnt=0
+for i in range(0,len(data_line_init),3):
+    if(data_line[i]!=data_line_init[i] or data_line[i+1]!=data_line_init[i+1] or data_line[i+2]!=data_line_init[i+2]):
+        err_cnt+=1
+FER=err_cnt/(len(data_line)/3)
+print('FER : ',FER)
 
 #---------Lecture--------------#
-file=open("jambon.bin","rb")
-byte=file.read(1)
-file.close()
+#file=open("jambon.bin","rb")
+#byte=file.read(1)
+#file.close()
 
-lecture=np.fromfile("jambon.bin","uint8") #array a partir du fichier
+#lecture=np.fromfile("jambon.bin","uint8") #array a partir du fichier
 
 # =============================================================================
 #--------------Test 3D array#----------------#

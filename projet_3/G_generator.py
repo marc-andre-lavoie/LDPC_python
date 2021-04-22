@@ -19,7 +19,7 @@ dc=6
 
 ##Reading the matrices
 matrices=[matrix for matrix in os.listdir("matrices_alireza") if ".txt"in matrix]
-matrixText = open("matrices_alireza/"+matrices[1],"r")
+matrixText = open("matrices_alireza/"+matrices[0],"r")
 lines=matrixText.readlines()
 bigListH=[]
 bigListG=[]
@@ -52,7 +52,7 @@ print("No noise :  {}".format(x))
 noise = np.zeros(n)
 noise[random.randint(0,n-1)]=1 # 1 bit flipped
 noise[random.randint(0,n-1)]=1 # 2 bits flipped
-#noise[random.randint(0,n-1)]=1 # 2 bits flipped
+noise[random.randint(0,n-1)]=1 # 3 bits flipped
 ### Noisy message
 y=(x+noise)%2
 
@@ -73,7 +73,9 @@ ci=np.nonzero(H)[0]
 vi=np.nonzero(H)[1] #Donne index de colonnes avec au moins un 1
 ksiC=np.ones((m,n),dtype="int")
 xDecoded=np.ones(n)
-while np.array_equal(xDecoded,x) == False and l<IT_MAX:
+xDecoded_p=np.zeros(n)
+#while np.array_equal(xDecoded,x) == False and l<IT_MAX: #While qui fct mais sketch
+while (not np.array_equal(xDecoded,xDecoded_p)) and l<IT_MAX:
     l+=1
 #Step 2
     
@@ -91,14 +93,14 @@ while np.array_equal(xDecoded,x) == False and l<IT_MAX:
     for i in range(0,n):
 
         nbNeg=ksiC[:,i].tolist().count(-1)
-        #if nbNeg>int(dv/2) and xChapeau[i]==1: #Supposed to be majority, doesn't work
-        if nbNeg == dv and xChapeau[i]==1:
+        if nbNeg>int(dv/2) and xChapeau[i]==1: #Supposed to be majority, doesn't work
+        #if nbNeg == dv and xChapeau[i]==1:
             ksiV[i]=-1
             
         #elif nbNeg<=int(dv/2) and xChapeau[i]==-1:
         elif nbNeg == 0 and xChapeau[i]==-1:
             ksiV[i]=1
-            
+    xDecoded_p=xDecoded       
     xDecoded = np.array([(x-1)/-2 for x in ksiV],dtype='int')        
     print("Next iteration")
     

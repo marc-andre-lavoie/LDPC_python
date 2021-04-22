@@ -28,7 +28,6 @@ for matrixH in matrices:
     print("working on {}".format(matrixH))
     obj=gal.paritycheck("matrices_alireza/"+matrixH) #Create the object
     of.write("Results for {} :\n".format(matrixH))
-    #of.write("\u03B1   \tBER\tSuccess\t\t\tFER\n")
     of.write("a   \tBER\tSuccess\t\t\tFER\tavg it\n")
     for prob in probabilities:
         #while obj.failed<failed_stop:

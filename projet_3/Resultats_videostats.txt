@@ -1,0 +1,8 @@
+#=================Resultats====================#
+BER avant correction :
+BER apres correction :
+Rapport de pixels errones :
+#=================Resultats====================#
+BER avant correction :
+BER apres correction :
+Rapport de pixels errones :
